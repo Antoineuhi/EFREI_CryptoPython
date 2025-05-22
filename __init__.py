@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Bienvenue ! Utilisez /encrypt/<clé>/<valeur> ou /decrypt/<clé>/<valeur>"
+    return "Bienvenue sur l'app web de chiffrement/déchiffrement! Utilisez /encrypt/<clé>/<valeur> ou /decrypt/<clé>/<valeur>"
 
 @app.route('/encrypt/<string:cle>/<string:valeur>')
 def encrypt_personnalise(cle, valeur):
@@ -17,7 +17,7 @@ def encrypt_personnalise(cle, valeur):
         f = Fernet(cle.encode())
         valeur_bytes = valeur.encode()
         token = f.encrypt(valeur_bytes)
-        return f"Valeur encryptée : {token.decode()}"
+        return f"Valeur chiffrée : {token.decode()}"
     except Exception as e:
         return f"Erreur : {str(e)}"
 
@@ -27,7 +27,7 @@ def decrypt_personnalise(cle, valeur):
         f = Fernet(cle.encode())
         valeur_bytes = valeur.encode()
         decrypted = f.decrypt(valeur_bytes)
-        return f"Valeur décryptée : {decrypted.decode()}"
+        return f"Valeur déchiffrée : {decrypted.decode()}"
     except Exception as e:
         return f"Erreur : {str(e)}"
       
