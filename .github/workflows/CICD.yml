@@ -1,4 +1,4 @@
-name: Industrialisation continue sur le serveur Alwaysdata
+name: Connexion Alwaysdata via SSH
 on: push
 jobs:
   Connexion:
@@ -9,9 +9,10 @@ jobs:
         with:
           host: "ssh-${{ secrets.USERNAME }}.alwaysdata.net"
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          password: ${{ secrets.SSH_KEY }}
           script: |
             cd $HOME/www/
+            ls -la
   Copy:
     needs: Connexion
     runs-on: ubuntu-latest
@@ -21,7 +22,7 @@ jobs:
         with:
           host: "ssh-${{ secrets.USERNAME }}.alwaysdata.net"
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          password: ${{ secrets.SSH_KEY }}
           script: |
             last_directory=$(basename ${{ runner.workspace }})
             cd $HOME/www/
