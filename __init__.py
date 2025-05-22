@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Bienvenue sur l'app web de chiffrement/déchiffrement! Utilisez /encrypt/<clé>/<valeur> ou /decrypt/<clé>/<valeur>"
+    return "Bienvenue sur l'app web de Antoine D de chiffrement/déchiffrement! Utilisez /encrypt/<clé>/<valeur> ou /decrypt/<clé>/<valeur>"
 
 @app.route('/encrypt/<string:cle>/<string:valeur>')
 def encrypt_personnalise(cle, valeur):
