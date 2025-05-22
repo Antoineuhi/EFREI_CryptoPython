@@ -14,38 +14,6 @@ HTML = """
 <html>
 <head>
     <title>App de Chiffrement/Déchiffrement</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-</head>
-<body class="bg-light">
-<div class="container mt-5">
-    <h2 class="mb-4">App de chiffrement / déchiffrement</h2>
-    <form method="POST">
-        <div class="mb-3">
-            <label for="key" class="form-label">Clé (Fernet)</label>
-            <input type="text" class="form-control" name="key" required>
-        </div>
-        <div class="mb-3">
-            <label for="text" class="form-label">Texte</label>
-            <input type="text" class="form-control" name="text" required>
-        </div>
-        <button type="submit" name="action" value="encrypt" class="btn btn-primary">Chiffrer</button>
-        <button type="submit" name="action" value="decrypt" class="btn btn-success">Déchiffrer</button>
-    </form>
-    {% if result %}
-    <div class="alert alert-info mt-4">
-        <strong>Résultat :</strong> {{ result }}
-    </div>
-    {% endif %}
-</div>
-</body>
-</html>
-"""
-
-HTML = """
-<!DOCTYPE html>
-<html>
-<head>
-    <title>App de Chiffrement/Déchiffrement</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
