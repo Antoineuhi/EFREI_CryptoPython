@@ -6,7 +6,7 @@ from urllib.request import urlopen
 import sqlite3
 import base64
 
-app = Flask(name)
+app = Flask(__name__)
 
 @app.route('/')
 def home():
