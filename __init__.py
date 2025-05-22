@@ -9,46 +9,28 @@ import base64
 app = Flask(name)
 
 @app.route('/')
-def hello_world():
-    return render_template('hello.html')
+def home():
+    return "Bienvenue sur l'app web de chiffrement/déchiffrement! Utilisez /encrypt/<clé>/<valeur> ou /decrypt/<clé>/<valeur>"
 
 @app.route('/encrypt/<string:cle>/<string:valeur>')
-def encryptage(cle, valeur):
+def encrypt_personnalise(cle, valeur):
     try:
-        # Vérifier si la clé est valide (doit être 32 bytes en base64)
-        cle_bytes = cle.encode()
-        if len(base64.urlsafe_b64decode(cle)) != 32:
-            return "Erreur : La clé doit être une clé Fernet valide (32 bytes encodée en base64)", 400
-
-Créer une instance Fernet avec la clé de l'utilisateur
-        f = Fernet(cle_bytes)
-
-        valeur_bytes = valeur.encode()  # Conversion str -> bytes
-        token = f.encrypt(valeur_bytes)  # Encrypt la valeur
-        return f"Valeur encryptée : {token.decode()}"
-    except ValueError as e:
-        return f"Erreur d'encryptage : Clé invalide ({str(e)})", 400
+        f = Fernet(cle.encode())
+        valeur_bytes = valeur.encode()
+        token = f.encrypt(valeur_bytes)
+        return f"Valeur chiffrée : {token.decode()}"
     except Exception as e:
-        return f"Erreur d'encryptage : {str(e)}", 500
+        return f"Erreur : {str(e)}"
 
 @app.route('/decrypt/<string:cle>/<string:valeur>')
-def decryptage(cle, valeur):
+def decrypt_personnalise(cle, valeur):
     try:
-        # Vérifier si la clé est valide (doit être 32 bytes en base64)
-        cle_bytes = cle.encode()
-        if len(base64.urlsafe_b64decode(cle)) != 32:
-            return "Erreur : La clé doit être une clé Fernet valide (32 bytes encodée en base64)", 400
-
-Créer une instance Fernet avec la clé de l'utilisateur
-        f = Fernet(cle_bytes)
-
-        valeur_bytes = valeur.encode()  # Conversion str -> bytes
-        decrypted_value = f.decrypt(valeur_bytes)  # Décrypt la valeur
-        return f"Valeur décryptée : {decrypted_value.decode()}"
-    except ValueError as e:
-        return f"Erreur de décryptage : Clé ou valeur invalide ({str(e)})", 400
+        f = Fernet(cle.encode())
+        valeur_bytes = valeur.encode()
+        decrypted = f.decrypt(valeur_bytes)
+        return f"Valeur déchiffrée : {decrypted.decode()}"
     except Exception as e:
-        return f"Erreur de décryptage : {str(e)}", 500
-
-if name == "main":
-    app.run(debug=True)
+        return f"Erreur : {str(e)}"
+      
+if __name__ == "__main__":
+  app.run(debug=True)
